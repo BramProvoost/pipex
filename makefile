@@ -1,5 +1,7 @@
 NAME		= pipex
-SRCFILES	= main.c
+SRCFILES	= main.c \
+			  get_cmd_path.c \
+			  handle_cmd.c
 OBJDIR		= obj
 VPATH		= src
 LIBFT		= lib/libft
