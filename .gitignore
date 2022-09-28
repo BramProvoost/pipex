@@ -1,1 +1,6 @@
 *.pdf
+.vscode/
+infile
+outfile
+obj/
+snippets.c
