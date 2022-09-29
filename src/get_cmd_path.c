@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 11:44:58 by bprovoos      #+#    #+#                 */
-/*   Updated: 2022/09/28 11:48:26 by bprovoos      ########   odam.nl         */
+/*   Updated: 2022/09/29 20:44:44 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ char	*get_cmd_path(char *cmd_without_flags, char **envp)
 		tmp = ft_strjoin(*path, "/");
 		path_and_cmd = ft_strjoin(tmp, cmd_without_flags);
 		free(tmp);
-		if (access(path_and_cmd, 0) == 0)
+		if (access(path_and_cmd, X_OK) == 0)
 			return (path_and_cmd);
+		if (access(cmd_without_flags, X_OK) == 0)
+			return (cmd_without_flags);
 		free(path_and_cmd);
 		path++;
 	}

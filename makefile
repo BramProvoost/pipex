@@ -1,5 +1,6 @@
 NAME		= pipex
 SRCFILES	= main.c \
+			  handle_errors.c \
 			  get_cmd_path.c \
 			  handle_cmd.c
 OBJDIR		= obj
