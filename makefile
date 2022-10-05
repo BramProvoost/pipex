@@ -6,7 +6,7 @@ SRCFILES	= main.c \
 OBJDIR		= obj
 VPATH		= src
 LIBFT		= lib/libft
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address
 OBJ			= $(addprefix obj/, $(SRCFILES:.c=.o))
 INC			= $(addprefix -I , \
 			  lib/libft)

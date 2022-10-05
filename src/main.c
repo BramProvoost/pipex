@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 09:31:28 by bprovoos      #+#    #+#                 */
-/*   Updated: 2022/09/29 20:49:35 by bprovoos      ########   odam.nl         */
+/*   Updated: 2022/10/05 13:45:56 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,11 @@
 void	wait_on_childs(	pid_t pid1, pid_t pid2)
 {
 	int	wstatus;
-	int	status_code;
 
 	waitpid(pid1, NULL, 0);
 	waitpid(pid2, &wstatus, 0);
 	if (WIFEXITED(wstatus))
-	{
-		status_code = WEXITSTATUS(wstatus);
-		exit(status_code);
-	}
+		exit(WEXITSTATUS(wstatus));
 }
 
 void	pipex(int iofd[2], char *argv[], char **envp)
@@ -55,25 +51,18 @@ int	main(int argc, char *argv[], char **envp)
 {
 	int	iofd[2];
 
-// to do:
-
-// Test 26: Test with spaces for command 1
-// zsh:1: command not found:   
-// pipex: Permission denied:   
+// Test 10: Command 1 doesn't exist.
+// zsh:1: command not found: grep12
+// pipex: No such file or directory: grep12
 // SUCCES: Exit codes correct (yours=0 | bash=0)
 // SUCCES: Output files the same.
 
-// Test 27: Test with spaces for command 2
-// zsh:1: command not found:   
-// pipex: Permission denied:   
+// Test 11: Command 2 doesn't exist.
+// zsh:1: command not found: wc12
+// pipex: No such file or directory: wc12
 // SUCCES: Exit codes correct (yours=127 | bash=127)
 // SUCCES: Output files the same.
 
-// Test 32: No PATH variable. NOTE: output files are not created. So red is good.
-// ./run_tests.sh: line 58: uname: No such file or directory
-// ./run_tests.sh: line 61: zsh: No such file or directory
-// ERROR: Exit codes differ (yours=0 | bash=127)
-// ERROR: Output files differ.
 	if (argc != 5)
 		return (1);
 	iofd[READ_FD] = open(argv[1], O_RDONLY);

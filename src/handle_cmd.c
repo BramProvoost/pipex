@@ -6,7 +6,7 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/28 11:46:23 by bprovoos      #+#    #+#                 */
-/*   Updated: 2022/09/29 20:44:38 by bprovoos      ########   odam.nl         */
+/*   Updated: 2022/10/05 12:08:57 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	handle_2e_cmd(int iofd[2], int pipe_end[2], char *cmd2, char **envp)
 	if (cmd2[0] == '\0')
 		exit(msg_error_code(cmd2, 126));
 	if (ft_isspace(cmd2[0]))
-		exit(msg_error_code(cmd2, 127));
+		exit(msg_custom_error_code("pipex: command not found:\n", 127));
 }
 
 void	handle_1e_cmd(int iofd[2], int pipe_end[2], char *cmd1, char **envp)
@@ -46,6 +46,8 @@ void	handle_1e_cmd(int iofd[2], int pipe_end[2], char *cmd1, char **envp)
 	if (path_and_cmd == NULL)
 		msg_error_code(splitted_cmd[0], 127);
 	execve(path_and_cmd, splitted_cmd, envp);
-	if (cmd1[0] == '\0' || ft_isspace(cmd1[0]))
+	if (cmd1[0] == '\0')
 		exit(msg_error_code(cmd1, 0));
+	if (ft_isspace(cmd1[0]))
+		exit(msg_custom_error_code("pipex: command not found:\n", 0));
 }
