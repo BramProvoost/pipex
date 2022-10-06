@@ -14,7 +14,7 @@ INC			= $(addprefix -I , \
 all: $(NAME)
 
 $(NAME): $(LIBFT)/libft.a $(OBJ)
-	$(CC) -o $@ $^
+	$(CC) -g -fsanitize=address -o $@ $^
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)

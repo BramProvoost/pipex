@@ -6,13 +6,13 @@
 /*   By: bprovoos <bprovoos@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/19 09:31:28 by bprovoos      #+#    #+#                 */
-/*   Updated: 2022/10/05 13:45:56 by bprovoos      ########   odam.nl         */
+/*   Updated: 2022/10/06 12:17:59 by bprovoos      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	wait_on_childs(	pid_t pid1, pid_t pid2)
+void	wait_on_childs(pid_t pid1, pid_t pid2)
 {
 	int	wstatus;
 
@@ -50,18 +50,6 @@ void	pipex(int iofd[2], char *argv[], char **envp)
 int	main(int argc, char *argv[], char **envp)
 {
 	int	iofd[2];
-
-// Test 10: Command 1 doesn't exist.
-// zsh:1: command not found: grep12
-// pipex: No such file or directory: grep12
-// SUCCES: Exit codes correct (yours=0 | bash=0)
-// SUCCES: Output files the same.
-
-// Test 11: Command 2 doesn't exist.
-// zsh:1: command not found: wc12
-// pipex: No such file or directory: wc12
-// SUCCES: Exit codes correct (yours=127 | bash=127)
-// SUCCES: Output files the same.
 
 	if (argc != 5)
 		return (1);
